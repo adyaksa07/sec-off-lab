@@ -49,7 +49,7 @@ body
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 25%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -96,20 +96,20 @@ body
 				    <p>
 				    <?php 
 				$username = $_SESSION['username'];
-				$sql = "SELECT age, gender, phone FROM users where username = '$username' ";
+				$sql = "SELECT age, gender, phone, username, email FROM users where username = '$username' ";
 				$result = $db->query($sql);
 
     			while($row = $result->fetch_assoc()) {
-        		echo " <p>Gender: " . $row["gender"]. "<p>Age: " . $row["age"]."<p>Phone: " . $row["phone"]. "<br>";
+        		echo "<p>Username: " . $row["username"]. "<p>Email: " . $row["email"]. " <p>Gender: " . $row["gender"]. "<p>Age: " . $row["age"]."<p>Phone: " . $row["phone"]. "<br>";
 				    }
 					?>
 					</p>
 				  </div>
 				</div>
 			<!-- edit profile -->
-		  	<p><a href="edit_profile.php">edit profile</a></p>
+		  	<p><a href="edit_profile.php">edit propil</a></p>
 		  	<!-- delete profile-->
-		  	<button type="submit" class="btn" name="delete_profile">delete profile</button>
+		  	<p><a href="delete_profile.php">delet propil</a></p>
 			<!-- logout -->
 			<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
 

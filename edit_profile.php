@@ -26,7 +26,7 @@
 			<div class="input-group">
 				<label>Phone</label>
 				<input type="text" name="phone" value="<?php echo $phone; ?>">
-				<input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>"
+				<input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
 			</div>
 			
 			<p><div class="input-group">

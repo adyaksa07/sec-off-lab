@@ -75,16 +75,6 @@
 		$username = mysqli_real_escape_string($db, $_POST['username']);
 		$query = '';
 
-		// $query2 = "UPDATE users SET ";
-		// if (!empty($gender)) {
-		// 	$query2 = $query2 + "gender = '$gender'";
-		// }
-		// if (!empty($age)) {
-		// 	$query2 = $query2 + ",age = '$age'";
-		// }
-
-		// $query2 = $query2 + "where username = '$username'";
-
 		if (!empty($gender) && !empty($age) && !empty($phone)) {
 			$query = "UPDATE users SET gender = '$gender', age = '$age', phone = '$phone' 
 					where username = '$username'";
@@ -107,17 +97,28 @@
 			$query = "UPDATE users SET phone = '$phone' 
 					where username = '$username'";
 		}
-		
-
 		mysqli_query($db, $query);
 		header('location: index.php');
-	}
+		// $query2 = "UPDATE users SET ";
+		// if (!empty($gender)) {
+		// 	$query2 = $query2 + "gender = '$gender'";
+		// }
+		// if (!empty($age)) {
+		// 	$query2 = $query2 + ",age = '$age'";
+		// }
 
+		// $query2 = $query2 + "where username = '$username'";
+	}
 	// delete profile
-	if (isset($_POST['delete_profile'])){
-		$query = "UPDATE users set age = null , gender = null , phone = null WHERE username = '$username'";
+	if (isset($_POST['delete_profile'])) {
+		$gender = mysqli_real_escape_string($db, $_POST['gender']);
+		$age = mysqli_real_escape_string($db, $_POST['age']);
+		$phone = mysqli_real_escape_string($db, $_POST['phone']);
+		$username = mysqli_real_escape_string($db, $_POST['username']);
+		$query = "UPDATE users SET age = null , gender = '' , phone = null WHERE username = '$username'";
+		// echo $query;
+		// die(0);
 		mysqli_query($db, $query);
 		header('location: index.php');
 	}
-
 ?>
