@@ -27,6 +27,46 @@
 <head>
 	<title>Home</title>`
 </head>
+<style>
+body
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}	
+</style>
 <body>
 	<div class="header">
 		<h2>Hompej Lab</h2>
@@ -45,9 +85,16 @@
 		<?php endif ?>
 		<!-- user info -->
 		<?php  if (isset($_SESSION['username'])) : ?>
-			<p>Welkam <strong><?php echo $_SESSION['username']; ?></strong></p>
-			<?php 
-				
+			<p>Welkam <strong><?php echo $_SESSION['username']; ?></strong></p>	
+				<!-- Trigger/Open The Modal -->
+				<button id="myBtn">View Profile</button>
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+				  <!-- Modal content -->
+				<div class="modal-content">
+				    <span class="close">&times;</span>
+				    <p>
+				    <?php 
 				$username = $_SESSION['username'];
 				$sql = "SELECT age, gender, phone FROM users where username = '$username' ";
 				$result = $db->query($sql);
@@ -55,14 +102,35 @@
     			while($row = $result->fetch_assoc()) {
         		echo " <p>Gender: " . $row["gender"]. "<p>Age: " . $row["age"]."<p>Phone: " . $row["phone"]. "<br>";
 				    }
-			?>
+					?>
+					</p>
+				  </div>
+				</div>
 			<!-- edit profile -->
 		  	<p><a href="edit_profile.php">edit profile</a></p>
+		  	<!-- delete profile-->
+		  	<button type="submit" class="btn" name="delete_profile">delete profile</button>
 			<!-- logout -->
 			<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
+
+			<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"> -->
 		
 				<?php endif ?>
 	</div>
-		
+<script>
+var modal = document.getElementById("myModal"); // modal
+var btn = document.getElementById("myBtn"); // modal button
+var span = document.getElementsByClassName("close")[0]; // x button
+btn.onclick = function() 
+	{ modal.style.display = "block"; 
+}// click button open modal
+span.onclick = function() 
+	{ modal.style.display = "none"; 
+} // click x close modal
+window.onclick = function(event) 
+	{ if (event.target == modal) { modal.style.display = "none";
+	}
+}// close on click outside modal
+</script>
 </body>
 </html>

@@ -74,6 +74,17 @@
 		$phone = mysqli_real_escape_string($db, $_POST['phone']);
 		$username = mysqli_real_escape_string($db, $_POST['username']);
 		$query = '';
+
+		// $query2 = "UPDATE users SET ";
+		// if (!empty($gender)) {
+		// 	$query2 = $query2 + "gender = '$gender'";
+		// }
+		// if (!empty($age)) {
+		// 	$query2 = $query2 + ",age = '$age'";
+		// }
+
+		// $query2 = $query2 + "where username = '$username'";
+
 		if (!empty($gender) && !empty($age) && !empty($phone)) {
 			$query = "UPDATE users SET gender = '$gender', age = '$age', phone = '$phone' 
 					where username = '$username'";
@@ -98,6 +109,13 @@
 		}
 		
 
+		mysqli_query($db, $query);
+		header('location: index.php');
+	}
+
+	// delete profile
+	if (isset($_POST['delete_profile'])){
+		$query = "UPDATE users set age = null , gender = null , phone = null WHERE username = '$username'";
 		mysqli_query($db, $query);
 		header('location: index.php');
 	}
